@@ -1,9 +1,9 @@
 package dev.kakueki61.todolist.repositories
 
 import dev.kakueki61.todolist.models.Task
+import dev.kakueki61.todolist.queryForObject
 import org.springframework.jdbc.core.JdbcTemplate
 import org.springframework.jdbc.core.RowMapper
-import org.springframework.jdbc.core.queryForObject
 import org.springframework.stereotype.Repository
 
 @Repository
@@ -16,7 +16,7 @@ class JdbcTaskRepository(private val jdbcTemplate: JdbcTemplate) : TaskRepositor
         jdbcTemplate.update("INSERT INTO task(content) VALUES(?)", content)
 //        val id = jdbcTemplate.queryForObject("SELECT last_insert_id()", Long::class.java)
 //        val id: Long = jdbcTemplate.queryForObject("SELECT last_insert_id()")
-        val id: Long = jdbcTemplate.queryForObject("SELECT last_insert_id()")!!
+        val id: Long = jdbcTemplate.queryForObject("SELECT last_insert_id()")
         return Task(id, content, false)
     }
 
@@ -31,4 +31,9 @@ class JdbcTaskRepository(private val jdbcTemplate: JdbcTemplate) : TaskRepositor
 
     override fun findById(id: Long): Task? =
             jdbcTemplate.query("SELECT id, content, done FROM task WHERE id = ?", rowMapper, id).firstOrNull()
+
+    fun foo() {
+        var x = 1
+        x = x + 2
+    }
 }

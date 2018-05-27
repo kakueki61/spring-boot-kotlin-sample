@@ -1,9 +1,8 @@
 package dev.kakueki61.todolist.repositories
 
 import dev.kakueki61.todolist.models.Task
-import org.springframework.stereotype.Repository
 
-@Repository
+//@Repository
 class InMemoryTaskRepository : TaskRepository {
 
     private val tasks: MutableList<Task> = mutableListOf()
